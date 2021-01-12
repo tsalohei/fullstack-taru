@@ -8,13 +8,56 @@ const Button = ({onClick, text}) => (
   </button>
 )
 
-const Stats = (props) => {
+const Stats = ({good, bad, neutral, total, sum}) => {
+  
   return (
     <div>
       <h2>Statistics</h2>
-      <p>good {props.good}</p>
-      <p>bad {props.bad}</p>
-      <p>neutral {props.neutral}</p>
+      <Basics good={good} bad={bad} neutral={neutral}/>
+      <Total total={total}/>
+      <Average sum={sum} total={total}/>
+      <Positive good={good} total={total}/>
+    </div>
+  )
+}
+
+const Basics = ({good, bad, neutral}) => {
+  return (
+    <div>
+      <p>good {good}</p>
+      <p>bad {bad}</p>
+      <p>neutral {neutral}</p>
+    </div>
+  )
+}
+
+const Total = ({total}) => {
+  return (
+    <p>all {total}</p>
+  )
+}
+
+const Positive = ({good, total}) => {
+  let result = good
+  if (good > 0) {
+    result = good / total
+  }
+  
+  return (
+    <div>
+      <p>positive {result} % </p>
+    </div>
+  )
+}
+
+const Average = ({sum, total}) => {
+  let average = total
+  if (average > 0) {
+    average = sum / total
+  }
+  return (
+    <div>
+      <p>average {average}</p>
     </div>
   )
 }
@@ -23,23 +66,34 @@ const App = () => {
   const [good, increaseGood] = useState(0)
   const [bad, increaseBad] = useState(0)
   const [neutral, increaseNeutral] = useState(0)
-  
-  const handleNeutralClick = () => increaseNeutral(neutral+1)
-  
-  const handleBadClick = () => increaseBad(bad +1)
-  
-  const handleGoodClick = () => increaseGood(good + 1)
+  const [total, increaseTotal] = useState(0)
+  const [sum, setSum] = useState(0)
 
+  const handleNeutralClick = () => {
+    increaseNeutral(neutral+1)
+    increaseTotal(total+1)
+  }  
+
+  const handleBadClick = () => {
+    increaseBad(bad +1) 
+    increaseTotal(total+1) 
+    setSum(sum-1)
+  }
+
+  const handleGoodClick = () => {
+    increaseGood(good + 1)
+    increaseTotal(total+1)
+    setSum(sum+1)
+  }  
   return (
     <div>
       <h1>Give feedback</h1>
       <Button onClick={handleGoodClick} text='good' />
       <Button onClick={handleBadClick} text='bad' />
       <Button onClick={handleNeutralClick} text='neutral' />
-      <Stats good={good} bad={bad} neutral={neutral}/>
+      <Stats good={good} bad={bad} neutral={neutral} total={total} sum={sum}/>
     </div>
   )
-
 }
 
 ReactDOM.render(
