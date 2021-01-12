@@ -9,7 +9,14 @@ const Button = ({onClick, text}) => (
 )
 
 const Stats = ({good, bad, neutral, total, sum}) => {
-  
+  if (total === 0) {
+    return (
+      <div>
+        <h2>Statistics</h2>
+        no feedback given!
+      </div>
+    )
+  }
   return (
     <div>
       <h2>Statistics</h2>
