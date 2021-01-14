@@ -7,21 +7,6 @@ const Header = ({ course }) => {
   )
 } 
 
-const Total = ({ course }) => {
-  const sum = course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises
-  return(
-    <p>Number of exercises {sum}</p>
-  ) 
-}
-
-const Part = (props) => {
-  return (
-    <p>
-      {props.part.name} {props.part.exercises}
-    </p>    
-  )
-}
-
 const Course = ({course}) => {
   return (
     <div>
@@ -38,8 +23,12 @@ const Content = ({ course }) => {
     <div>
       {items.map(item => 
       <p key={item.id}>
-        {item.name}
+        {item.name} {item.exercises}
       </p>)}
+      <p>
+        <strong>total of {items.reduce((sum, part) => 
+        sum + part.exercises, 0)} exercises</strong>
+      </p>
     </div>
   )
 }
@@ -66,7 +55,7 @@ const App = () => {
       },
       {
         name: 'Javascript madness',
-        excercises: 10000,
+        exercises: 10000,
         id: 4
       }
     ]
