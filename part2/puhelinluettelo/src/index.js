@@ -14,8 +14,13 @@ const App = () => {
         name: newName,
         id: persons.length + 1
     }
-    
-    setPersons(persons.concat(personObject))
+    console.log(isDuplicate(newName))
+
+    if (!isDuplicate(newName)) {
+        setPersons(persons.concat(personObject))
+    } else {
+        window.alert(`${newName} is already added to phonebook`)
+    }   
     setNewName('')
   }
 
@@ -23,6 +28,15 @@ const App = () => {
       console.log(event.target.value)
       setNewName(event.target.value)
   } 
+
+  const isDuplicate = (newName) => {
+      for (let i = 0; i < persons.length; i++) {
+          if (persons[i].name === newName) {
+              return true
+          }
+      }
+      return false
+  }
 
   return (
     <div>
