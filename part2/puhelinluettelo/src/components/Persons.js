@@ -8,7 +8,7 @@ const Persons = ({persons, filter}) => {
             includes(filter.toLowerCase())).
             map(person => 
                 <PersonRecord key={person.id} 
-                name={person.name} phone={person.phone}/>)
+                name={person.name} number={person.number}/>)
             
 
     
