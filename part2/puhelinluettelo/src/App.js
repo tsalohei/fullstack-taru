@@ -20,11 +20,23 @@ const App = () => {
       })
   }, [])  
 
+  const handleRemoval = (id, name) => {
+    const answer = window.confirm(`haluatko varmasti poistaa ${name}`)
+    if (!answer) return
+    if (answer === true) {
+      numberService
+      .remove(id)  
+      
+      setPersons(persons.filter(person => person.id !== id))
+    }
+    
+    
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
         name: newName,
-        id: persons.length + 1,
         number: newNumber
     }
     console.log(isDuplicate(newName))
@@ -73,7 +85,7 @@ const App = () => {
       <PersonForm addPerson={addPerson} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>  
 
       <h2>Numbers</h2>
-      <Persons persons={persons} filter={filter}/>
+      <Persons persons={persons} filter={filter} removalHandler={handleRemoval}/>
     </div>
   )
 

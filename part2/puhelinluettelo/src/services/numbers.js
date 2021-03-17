@@ -10,4 +10,8 @@ const create = newObject => {
     const request = axios.post(myUrl, newObject)
     return request.then(response => response.data)
 }
-export default { getAll, create }
+
+const remove = id => {
+    const request = axios.delete(`${myUrl}/${id}`)
+}
+export default { getAll, create, remove }

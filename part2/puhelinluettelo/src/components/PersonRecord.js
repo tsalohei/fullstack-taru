@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PersonRecord = ({name, number}) => {
+const PersonRecord = ({name, number, removalHandler}) => {
     return (
-        <p>{name} {number}</p>
+        <p>{name} {number} <button onClick={removalHandler}>delete</button></p>
     )
 }
 
