@@ -1,24 +1,14 @@
 {
   "persons": [
     {
-      "name": "hemuli",
-      "number": "6666666",
-      "id": 5
-    },
-    {
       "name": "Fifi",
       "id": 6,
-      "number": 12345
+      "number": "098098098"
     },
     {
       "name": "Diana",
-      "number": "111111",
+      "number": "333333",
       "id": 7
-    },
-    {
-      "name": "Sirpa",
-      "number": "22222222222",
-      "id": 8
     },
     {
       "name": "Greta",
@@ -68,6 +58,16 @@
       "name": "Riina",
       "number": "111233",
       "id": 18
+    },
+    {
+      "name": "Elisabeth",
+      "number": "982375982375",
+      "id": 19
+    },
+    {
+      "name": "Heidi",
+      "number": "85852789",
+      "id": 20
     }
   ]
 }

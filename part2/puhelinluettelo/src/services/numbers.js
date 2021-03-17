@@ -12,7 +12,7 @@ const create = newObject => {
 }
 
 const remove = id => {
-    const request = axios.delete(`${myUrl}/${id}`)
+    axios.delete(`${myUrl}/${id}`)
 }
 
 const replace = (id, updatedObject) => {
