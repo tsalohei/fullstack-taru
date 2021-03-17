@@ -21,18 +21,16 @@ const App = () => {
   }, [])  
 
   const handleRemoval = (id, name) => {
-    const answer = window.confirm(`haluatko varmasti poistaa ${name}`)
+    const answer = window.confirm(`are you sure you want to delete ${name}`)
     if (!answer) return
-    if (answer === true) {
-      numberService
-      .remove(id)  
-      
-      setPersons(persons.filter(person => person.id !== id))
-    }
     
+    numberService
+    .remove(id)  
     
+    setPersons(persons.filter(person => person.id !== id))   
   }
 
+  
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
@@ -48,7 +46,21 @@ const App = () => {
             setPersons(persons.concat(returnedPerson))
           })
     } else {
-        window.alert(`${newName} is already added to phonebook`)
+        const oldPerson = persons.find(person => person.name === personObject.name)
+        const id = oldPerson.id
+        const changedPerson = {...oldPerson, number: personObject.number}
+        const result = window.confirm(`${newName} is already added to phonebook. Do you want to replace the old number with a new one?`)
+        if (!result) return
+        
+        numberService
+          .replace(id, changedPerson) 
+          .then(updatedPerson => {
+            setPersons(
+              persons
+                .filter(person => person !== oldPerson) 
+                .concat(changedPerson) 
+            )
+          })  
     }   
     setNewName('')
     setNewNumber('')
